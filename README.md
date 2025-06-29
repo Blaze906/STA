@@ -17,7 +17,7 @@ Questa funzionalità permette di analizzare un file di testo specificato per:
 Questa funzionalità analizza e permette di ripulire il file system da:
 
 * directory vuote
-* file vuoti
+* file vuoti o duplicati
 * file temporanei
 
 Inoltre, se l'opzione `--dry-run` è attivato, simula le operazioni di eliminazione senza modificare effettivamente il file system.
