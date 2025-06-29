@@ -24,12 +24,12 @@ def main():
         from modules.text_analyzer import analyze_text
         analyze_text(args.file_path)
     elif args.command == 'clean':
-        from modules.cleaner import clean_directories
-        clean_directories(
-            directories=args.directories,
-            do_dupes=args.dupes,
-            do_tmp=args.tmp,
-            do_empty=args.empty,
+        from modules.cleaner import run_cleaner
+        run_cleaner(
+            paths=args.directories,
+            find_dupes=args.dupes,
+            remove_tmp=args.tmp,
+            remove_empty=args.empty,
             dry_run=args.dry_run
         )
     else:
