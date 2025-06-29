@@ -12,7 +12,15 @@ Questa funzionalità permette di analizzare un file di testo specificato per:
 *   Contare il numero totale di parole.
 *   Calcolare la lunghezza media delle parole.
 
-I risultati vengono presentati in un formato chiaro e incorniciato direttamente nel terminale.
+## Smart Clean-up (`clean`)
+
+Questa funzionalità analizza e permette di ripulire il file system da:
+
+* directory vuote
+* file vuoti
+* file temporanei
+
+Inoltre, se l'operatore `--dry-run` è attivato, simula le operazioni di eliminazione senza modificare effettivamente il file system.
 
 ## Prerequisiti
 
@@ -21,6 +29,7 @@ I risultati vengono presentati in un formato chiaro e incorniciato direttamente 
 
 ## Installazione
 
+Ci sono due possibili modi di installazione:
 1.  Clona il repository dal tuo terminale:
     ```bash
     git clone https://github.com/Blaze906/STA.git
@@ -30,37 +39,35 @@ I risultati vengono presentati in un formato chiaro e incorniciato direttamente 
 
 ## Utilizzo
 
-Il comando principale per interagire con STA è `python sta.py`.
+Il comando principale per interagire con STA è `python sta.py` se si è gia nella directory `sta_project`.
+Altrimenti bisogna usare `python sta_project/sta.py`.
 
 ### `analizza_testo`
 
 Per analizzare un file di testo, usa il seguente comando dalla directory `sta_project`:
 
 ```bash
-python sta.py analizza_testo "percorso_del_file_txt"
+python sta.py text_analyzer "percorso_del_file_txt"
 ```
 
-Sostituisci `<percorso_del_file_txt>` con il percorso effettivo del file di testo che desideri analizzare.
+Sostituisci `"percorso_del_file_txt"` con il percorso effettivo del file di testo che desideri analizzare.
 
 **Esempio:**
-
+(Il file da analizzare è in un altra directory, quindi specifichiamo `sta_project/sta.py`)
 ```bash
-python sta.py analizza_testo "C:\Users\Documents\STA\Documentazione_STA.txt"
+python sta_project/sta.py text_analyzer "C:\Users\Documents\STA\Documentazione_STA.txt"
 ```
 
-(Assumendo che `esempio.txt` si trovi nella directory principale del progetto, una sopra `sta_project`)
 
-### `pulisci_sistema`
-
-Questa funzionalità permette di pulire il sistema da file duplicati, file temporanei e directory vuote.
+### `clean`
 
 Per utilizzare il cleaner, usa il seguente comando dalla directory `sta_project`:
 
 ```bash
-python sta.py pulisci_sistema <percorso_o_percorsi> [opzioni]
+python sta_project/sta.py clean [OPZIONI] [PERCORSI_FILE]
 ```
 
-Sostituisci `<percorso_o_percorsi>` con il percorso o i percorsi (separati da spazio) che desideri analizzare.
+Sostituisci `[PERCORSI_FILE]` con il percorso o i percorsi (separati da spazio) che desideri analizzare.
 
 **Opzioni disponibili:**
 
@@ -73,24 +80,24 @@ Sostituisci `<percorso_o_percorsi>` con il percorso o i percorsi (separati da sp
 
 **Esempi:**
 
-1.  **Trovare e rimuovere duplicati in una specifica cartella (simulazione):**
+1.  **Simulare la rimozione di file temporanei nella directory corrente:**
     ```bash
-    python sta.py pulisci_sistema "/percorso/alla/cartella" --dupes --dry-run
+    python sta_project/sta.py clean --tmp --dry-run
     ```
 
-2.  **Rimuovere file temporanei e directory vuote da più percorsi:**
+2.  **Rimuovere file temporanei e le directory che diventano vuote nella cartella ~/Downloads:**
     ```bash
-    python sta.py pulisci_sistema "/percorso/cartella1" "/un/altro/percorso" --tmp --empty
+    python sta_project/sta.py clean --tmp --empty ~/Downloads
     ```
 
-3.  **Eseguire una pulizia completa (duplicati, temporanei, vuote) di una cartella:**
+3.  **Trovare e rimuovere file duplicati (mantenendo il primo trovato) e file temporanei nella directory corrente e in ~/Documenti, mostrando solo cosa verrebbe fatto (dry run):**
     ```bash
-    python sta.py pulisci_sistema "./documenti" --dupes --tmp --empty
+    python sta_project/sta.py clean --dupes --tmp --dry-run . ~/Documenti
     ```
 
 ## Esempio di Output
 
-L'output dell'analisi di un file di testo (`analizza_testo`) sarà simile al seguente:
+L'output dell'analisi di un file di testo (`text_analyzer`) sarà simile al seguente:
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
@@ -106,7 +113,7 @@ L'output dell'analisi di un file di testo (`analizza_testo`) sarà simile al seg
 ```
 *(Nota: i valori numerici sono puramente illustrativi)*
 
-L'output della pulizia del sistema (`pulisci_sistema`) sarà simile al seguente:
+L'output della pulizia del sistema (`clean`) sarà simile al seguente:
 ```
 [FILE] (dry) deleted  -> /percorso/esempio/tmp/file_temporaneo.tmp
 [DIR ] (dry) deleted  -> /percorso/esempio/vuota/__pycache__
