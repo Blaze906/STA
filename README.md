@@ -50,9 +50,47 @@ python sta.py analizza_testo "C:\Users\Documents\STA\Documentazione_STA.txt"
 
 (Assumendo che `esempio.txt` si trovi nella directory principale del progetto, una sopra `sta_project`)
 
+### `pulisci_sistema`
+
+Questa funzionalità permette di pulire il sistema da file duplicati, file temporanei e directory vuote.
+
+Per utilizzare il cleaner, usa il seguente comando dalla directory `sta_project`:
+
+```bash
+python sta.py pulisci_sistema <percorso_o_percorsi> [opzioni]
+```
+
+Sostituisci `<percorso_o_percorsi>` con il percorso o i percorsi (separati da spazio) che desideri analizzare.
+
+**Opzioni disponibili:**
+
+*   `--dupes`: Ricerca e rimuove file duplicati (mantenendo una copia).
+*   `--tmp`: Rimuove file e directory temporanee (es. `.tmp`, `.log`, `__pycache__`).
+*   `--empty`: Elimina directory vuote.
+*   `--dry-run`: Simula l'operazione di pulizia senza apportare modifiche effettive al filesystem. Mostra cosa verrebbe eliminato.
+
+È possibile combinare le opzioni `--dupes`, `--tmp`, e `--empty`. Se non viene specificata nessuna di queste, il comando non eseguirà alcuna azione di pulizia specifica, ma potrà comunque scansionare le directory (utile con `--dry-run` per una panoramica).
+
+**Esempi:**
+
+1.  **Trovare e rimuovere duplicati in una specifica cartella (simulazione):**
+    ```bash
+    python sta.py pulisci_sistema "/percorso/alla/cartella" --dupes --dry-run
+    ```
+
+2.  **Rimuovere file temporanei e directory vuote da più percorsi:**
+    ```bash
+    python sta.py pulisci_sistema "/percorso/cartella1" "/un/altro/percorso" --tmp --empty
+    ```
+
+3.  **Eseguire una pulizia completa (duplicati, temporanei, vuote) di una cartella:**
+    ```bash
+    python sta.py pulisci_sistema "./documenti" --dupes --tmp --empty
+    ```
+
 ## Esempio di Output
 
-L'output dell'analisi di un file sarà simile al seguente:
+L'output dell'analisi di un file di testo (`analizza_testo`) sarà simile al seguente:
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
@@ -67,6 +105,23 @@ L'output dell'analisi di un file sarà simile al seguente:
 ╚══════════════════════════════════════════════════════════════════════════╝
 ```
 *(Nota: i valori numerici sono puramente illustrativi)*
+
+L'output della pulizia del sistema (`pulisci_sistema`) sarà simile al seguente:
+```
+[FILE] (dry) deleted  -> /percorso/esempio/tmp/file_temporaneo.tmp
+[DIR ] (dry) deleted  -> /percorso/esempio/vuota/__pycache__
+[FILE] deleted  -> /percorso/esempio/documenti_duplicati/copia_documento.txt
+
+============================================================
+RESOCONTO SMART CLEAN-UP
+============================================================
+ File eliminati : 3
+ Cartelle elim. : 1
+ Spazio recup.  : 1.25 MB
+Nessun errore rilevato.
+============================================================
+```
+*(Nota: i percorsi e i valori sono puramente illustrativi)*
 
 ## Come Contribuire al Progetto
 
