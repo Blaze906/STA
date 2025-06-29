@@ -25,7 +25,7 @@ Inoltre, se l'opzione `--dry-run` è attivato, simula le operazioni di eliminazi
 ## Prerequisiti
 
 *   Python 3.6 o superiore installato sul sistema
-*   Il file sta deve essere un eseguibile o richiamato tramite l'interprete python
+*   Il file sta.py deve essere richiamato tramite l'interprete python
 
 ## Installazione
 
@@ -40,11 +40,11 @@ Ci sono due possibili modi di installazione:
 ## Utilizzo
 
 Il comando principale per interagire con STA è `python sta.py` se si è gia nella directory `sta_project`.
-Altrimenti bisogna usare `python sta_project/sta.py`.
+Altrimenti bisogna usare `python "percorso_completo_fino_a_sta_project/sta.py"`.
 
 ### `analizza_testo`
 
-Per analizzare un file di testo, usa il seguente comando dalla directory `sta_project`:
+Per analizzare un file di testo, usa il seguente comando (se ti trovi nella directory `sta_project`):
 
 ```bash
 python sta.py text_analyzer "percorso_del_file_txt"
@@ -55,16 +55,16 @@ Sostituisci `"percorso_del_file_txt"` con il percorso effettivo del file di test
 **Esempio:**
 (Il file da analizzare è in un altra directory, quindi specifichiamo `sta_project/sta.py`)
 ```bash
-python sta_project/sta.py text_analyzer "C:\Users\Documents\STA\Documentazione_STA.txt"
+python "percorso_completo_fino_a_sta_project/sta.py" text_analyzer "C:\Users\Documents\STA\Documentazione_STA.txt"
 ```
 
 
 ### `clean`
 
-Per utilizzare il cleaner, usa il seguente comando dalla directory `sta_project`:
+Per utilizzare il cleaner, usa il seguente comando (se ti trovi nella directory `sta_project`):
 
 ```bash
-python sta_project/sta.py clean [OPZIONI] [PERCORSI_FILE]
+python sta.py clean [OPZIONI] [PERCORSI_FILE]
 ```
 
 Sostituisci `[PERCORSI_FILE]` con il percorso o i percorsi (separati da spazio) che desideri analizzare.
@@ -82,17 +82,17 @@ Sostituisci `[PERCORSI_FILE]` con il percorso o i percorsi (separati da spazio) 
 
 1.  **Simulare la rimozione di file temporanei nella directory corrente:**
     ```bash
-    python sta_project/sta.py clean --tmp --dry-run
+    python "percorso_completo_fino_a_sta_project/sta.py" clean --tmp --dry-run
     ```
 
 2.  **Rimuovere file temporanei e le directory che diventano vuote nella cartella ~/Downloads:**
     ```bash
-    python sta_project/sta.py clean --tmp --empty ~/Downloads
+    python "percorso_completo_fino_a_sta_project/sta.py" clean --tmp --empty ~/Downloads
     ```
 
 3.  **Trovare e rimuovere file duplicati (mantenendo il primo trovato) e file temporanei nella directory corrente e in ~/Documenti, mostrando solo cosa verrebbe fatto (dry run):**
     ```bash
-    python sta_project/sta.py clean --dupes --tmp --dry-run . ~/Documenti
+    python "percorso_completo_fino_a_sta_project/sta.py" clean --dupes --tmp --dry-run . ~/Documenti
     ```
 
 ## Esempio di Output
