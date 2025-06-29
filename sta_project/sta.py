@@ -1,6 +1,7 @@
 # Main script for STA (System Task Automator)
 
 import argparse
+from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser(description="STA - System Task Automator")
@@ -25,8 +26,10 @@ def main():
         analyze_text(args.file_path)
     elif args.command == 'clean':
         from modules.cleaner import run_cleaner
+        #Convert directory strings to Path objects
+        path_objects = [Path(d) for d in args.directories]
         run_cleaner(
-            paths=args.directories,
+            paths=path_objects,
             find_dupes=args.dupes,
             remove_tmp=args.tmp,
             remove_empty=args.empty,
