@@ -20,7 +20,7 @@ Questa funzionalità analizza e permette di ripulire il file system da:
 * file vuoti
 * file temporanei
 
-Inoltre, se l'operatore `--dry-run` è attivato, simula le operazioni di eliminazione senza modificare effettivamente il file system.
+Inoltre, se l'opzione `--dry-run` è attivato, simula le operazioni di eliminazione senza modificare effettivamente il file system.
 
 ## Prerequisiti
 
