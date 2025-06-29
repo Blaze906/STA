@@ -256,3 +256,4 @@ def run_cleaner(
 
     # Valore di uscita: 0 ok, 1 se errori
     sys.exit(1 if report.errors else 0)
+
